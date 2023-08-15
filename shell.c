@@ -33,8 +33,9 @@ char *read_command(void)
 		if (feof(stdin))
 		{return (NULL); }
 	else
-		perror("getline failed");
+		{perror("getline failed");
 		exit(1);
+		}
 	}
 	if (read > 0 && command[read - 1] == '\n')
 	{
