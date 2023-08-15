@@ -4,23 +4,35 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #define MAX_COMMAND_LENGTH 100
+/**
+ * display_prompt - displays the prompt
+ * Return: void
+ */
 /* Affiche le prompt */
 void display_prompt(void)
 {
+	if (!feof(stdin))
 	printf("$ "); /* Affiche le prompt */
 }
+/**
+ * read_command - read the command
+ * Return: command
+ */
 /* Lit la commande entrée par l'utilisateur */
 char *read_command(void)
 {
 	char *command;
 	size_t len;
 	ssize_t read;
-	len = 0;
 
+	len = 0;
 	command = NULL;
 	read = getline(&command, &len, stdin);
 	if (read == -1)
 	{
+		if (feof(stdin))
+		{return (NULL); }
+	else
 		perror("getline failed");
 		exit(1);
 	}
@@ -31,10 +43,16 @@ char *read_command(void)
 	return (command);
 }
 /* Exécute la commande en créant un nouveau processus */
+/**
+ * execute_command - execute the command
+ * @command : the command
+ * Return: void
+ */
 void execute_command(char *command)
 {
 	pid_t child_pid;
 	int status;
+
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -45,6 +63,7 @@ void execute_command(char *command)
 	{
 		/* Configuration des arguments pour execve*/
 		char *argv[4];
+
 		argv[0] = "/bin/sh";
 		argv[1] = "-c";
 		argv[2] = command;
@@ -61,9 +80,14 @@ void execute_command(char *command)
 		waitpid(child_pid, &status, 0);
 	}
 }
+/**
+ * main - simple shell
+ * Return: void
+ */
 int main(void)
 {
 	char *command;
+
 	while (1)
 	{
 		/* Affiche le prompt */
@@ -71,11 +95,13 @@ int main(void)
 		/* Lit la commande entrée par l'utilisateur*/
 		command = read_command();
 		/* Exécute la commande seulement si elle n'est pas vide*/
+		if (command == NULL)
+		{break; }
 		if (command[0] != '\0')
 		{
 			execute_command(command);
 		}
 		free(command); /* Libère la mémoire allouée par getline*/
 	}
-	return 0;
+	return (0);
 }
