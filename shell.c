@@ -11,7 +11,6 @@
 /* Affiche le prompt */
 void display_prompt(void)
 {
-	if (!feof(stdin))
 	printf("$ "); /* Affiche le prompt */
 }
 /**
@@ -30,9 +29,6 @@ char *read_command(void)
 	read = getline(&command, &len, stdin);
 	if (read == -1)
 	{
-		if (feof(stdin))
-		{return (NULL); }
-	else
 		{perror("getline failed");
 		exit(1);
 		}
@@ -92,6 +88,7 @@ int main(void)
 	while (1)
 	{
 		/* Affiche le prompt */
+		if (isatty(STDIN_FILENO))
 		display_prompt();
 		/* Lit la commande entrée par l'utilisateur*/
 		command = read_command();
