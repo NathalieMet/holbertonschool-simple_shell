@@ -27,74 +27,82 @@ char *read_command(void)
 	len = 0;
 	command = NULL;
 	read = getline(&command, &len, stdin);
-	
-	if (read > 0 && command[read - 1] == '\n')
+	if (read == -1)
 	{
-		command[read - 1] = '\0';
-	}
-	return (command);
-}
-/* Exécute la commande en créant un nouveau processus */
-/**
- * execute_command - execute the command
- * @command : the command
- * Return: void
- */
-void execute_command(char *command)
-{
-	pid_t child_pid;
-	int status;
-
-	child_pid = fork();
-	if (child_pid == -1)
-	{
-		perror("fork failed");
-		exit(1);
-	}
-	else if (child_pid == 0)
-	{
-		/* Configuration des arguments pour execve*/
-		char *argv[4];
-
-		argv[0] = "/bin/sh";
-		argv[1] = "-c";
-		argv[2] = command;
-		argv[3] = NULL;
-		/* Exécute la commande en utilisant le shell*/
-		execve("/bin/sh", argv, NULL);
-		/* En cas d'échec de execve */
-		perror("execve failed");
-		exit(1);
-	}
-	else
-	{
-		/* Attends que le processus enfant se termine*/
-		waitpid(child_pid, &status, 0);
-	}
-}
-/**
- * main - simple shell
- * Return: void
- */
-int main(void)
-{
-	char *command;
-
-	while (1)
-	{
-		/* Affiche le prompt */
-		if (isatty(STDIN_FILENO))
-		display_prompt();
-		/* Lit la commande entrée par l'utilisateur*/
-		command = read_command();
-		/* Exécute la commande seulement si elle n'est pas vide*/
-		if (command == NULL)
-		{break; }
-		if (command[0] != '\0')
 		{
-			execute_command(command);
+			perror("getline failed");
+			exit(1);
 		}
-		free(command); /* Libère la mémoire allouée par getline*/
 	}
-	return (0);
-}
+		if (read > 0 && command[read - 1] == '\n')
+		{
+			command[read - 1] = '\0';
+		}
+		return (command);
+	}
+	/* Exécute la commande en créant un nouveau processus */
+	/**
+	 * execute_command - execute the command
+	 * @command : the command
+	 * Return: void
+	 */
+	void execute_command(char *command)
+	{
+		pid_t child_pid;
+		int status;
+
+		child_pid = fork();
+		if (child_pid == -1)
+		{
+			perror("fork failed");
+			exit(1);
+		}
+		else if (child_pid == 0)
+		{
+			/* Configuration des arguments pour execve*/
+			char *argv[4];
+
+			argv[0] = "/bin/sh";
+			argv[1] = "-c";
+			argv[2] = command;
+			argv[3] = NULL;
+			/* Exécute la commande en utilisant le shell*/
+			execve("/bin/sh", argv, NULL);
+			/* En cas d'échec de execve */
+			perror("execve failed");
+			exit(1);
+		}
+		else
+		{
+			/* Attends que le processus enfant se termine*/
+			waitpid(child_pid, &status, 0);
+		}
+	}
+	/**
+	 * main - simple shell
+	 * Return: void
+	 */
+	int main(void)
+	{
+		char *command;
+
+		while (1)
+		{
+			/* Affiche le prompt */
+			if (isatty(STDIN_FILENO))
+				display_prompt();
+			/* Lit la commande entrée par l'utilisateur*/
+			command = read_command();
+			/* Exécute la commande seulement si elle n'est pas vide*/
+			if (command == NULL)
+			{
+				break;
+			}
+			if (command[0] != '\0')
+			{
+				execute_command(command);
+			}
+			free(command); /* Libère la mémoire allouée par getline*/
+		}
+		return (0);
+	}
