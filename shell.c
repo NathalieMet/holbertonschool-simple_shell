@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 #define MAX_COMMAND_LENGTH 100
 /**
- * display_prompt - displays the prompt
+ * display_prompt -displays the prompt
  * Return: void
  */
 /* Affiche le prompt */
