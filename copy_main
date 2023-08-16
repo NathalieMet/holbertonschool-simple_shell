@@ -1,0 +1,28 @@
+/**
+ * main - simple shell
+ * Return: void
+ */
+int main(void)
+{
+	char *command;
+
+	while (1)
+	{
+		/* Affiche le prompt */
+		if (isatty(STDIN_FILENO))
+		display_prompt();
+		/* Lit la commande entrée par l'utilisateur*/
+		command = read_command();
+		/* Exécute la commande seulement si elle n'est pas vide*/
+		if (command == NULL)
+		{
+			break;
+		}
+		if (command[0] != '\0')
+		{
+			execute_command(command);
+		}
+		free(command); /* Libère la mémoire allouée par getline*/
+	}
+	return (0);
+}
