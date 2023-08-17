@@ -90,11 +90,12 @@ int main(void)
 
 	while (1)
 	{
-		/* Affiche le prompt */
 		if (isatty(STDIN_FILENO))
+		{
 			display_prompt();
+		}
 
-		/* Lit la commande entrée par l'utilisateur ou depuis le fichier/redirection */
+		/* Lire la commande depuis l'utilisateur ou depuis un fichier/redirection*/
 		if (isatty(STDIN_FILENO))
 		{
 			command = read_command();
@@ -105,19 +106,22 @@ int main(void)
 			command = (char *)malloc(len * sizeof(char));
 			if (command == NULL)
 			{
-				perror("malloc failed");
+				perror("malloc a échoué");
 				exit(1);
 			}
 			read = getline(&command, &len, stdin);
 			if (read == -1)
 			{
 				free(command);
-				if (!feof(stdin))
+				if (!isatty(STDIN_FILENO))
 				{
-					perror("getline failed");
+					break; /* Fin de fichier atteinte*/
+				}
+				else
+				{
+					perror("getline a échoué");
 					exit(1);
 				}
-				break; /* Fin de fichier atteinte */
 			}
 			if (read > 0 && command[read - 1] == '\n')
 			{
@@ -125,12 +129,14 @@ int main(void)
 			}
 		}
 
-		/* Exécute la commande seulement si elle n'est pas vide */
+		/* Exécuter la commande seulement si elle n'est pas vide */
 		if (command[0] != '\0')
 		{
 			execute_command(command);
 		}
-		free(command); /* Libère la mémoire allouée par getline ou malloc */
+
+		free(command); /* Libérer la mémoire */
 	}
-	return (0);
+
+	return 0;
 }
