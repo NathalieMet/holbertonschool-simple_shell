@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 #define MAX_COMMAND_LENGTH 100
 /**
- * display_prompt -displays the prompt
+ * display_prompt - displays the prompt
  * Return: void
  */
 /* Affiche le prompt */
@@ -29,103 +29,95 @@ char *read_command(void)
 	read = getline(&command, &len, stdin);
 	if (read == -1)
 	{
-		{
-			perror("getline failed");
-			exit(1);
-		}
+		perror("getline failed");
+		exit(1);
 	}
-		if (read > 0 && command[read - 1] == '\n')
-		{
-			command[read - 1] = '\0';
-		}
-		return (command);
-	}
-	/* Exécute la commande en créant un nouveau processus */
-	/**
-	 * execute_command - execute the command
-	 * @command : the command
-	 * Return: void
-	 */
-	void execute_command(char *command)
+	if (read > 0 && command[read - 1] == '\n')
 	{
-		pid_t child_pid;
-		int status;
-
-		child_pid = fork();
-		if (child_pid == -1)
-		{
-			perror("fork failed");
-			exit(1);
-		}
-		else if (child_pid == 0)
-		{
-			/* Configuration des arguments pour execve*/
-			char *argv[4];
-
-			argv[0] = "/bin/sh";
-			argv[1] = "-c";
-			argv[2] = command;
-			argv[3] = NULL;
-			/* Exécute la commande en utilisant le shell*/
-			execve("/bin/sh", argv, NULL);
-			/* En cas d'échec de execve */
-			perror("execve failed");
-			exit(1);
-		}
-		else
-		{
-			/* Attends que le processus enfant se termine*/
-			waitpid(child_pid, &status, 0);
-		}
+		command[read - 1] = '\0';
 	}
-	/**
-	 * main - simple shell
-	 * Return: void
-	 */
-	int main(void)
+	return (command);
+}
+/* Exécute la commande en créant un nouveau processus */
+/**
+ * execute_command - execute the command
+ * @command : the command
+ * Return: void
+ */
+void execute_command(char *command)
+{
+	pid_t child_pid;
+	int status;
+
+	child_pid = fork();
+	if (child_pid == -1)
 	{
-		char *command;
+		perror("fork failed");
+		exit(1);
+	}
+	else if (child_pid == 0)
+	{
+		/* Configuration des arguments pour execve*/
+		char *argv[4];
+
+		argv[0] = "/bin/sh";
+		argv[1] = "-c";
+		argv[2] = command;
+		argv[3] = NULL;
+		/* Exécute la commande en utilisant le shell*/
+		execve("/bin/sh", argv, NULL);
+		/* En cas d'échec de execve */
+		perror("execve failed");
+		exit(1);
+	}
+	else
+		/* Attends que le processus enfant se termine*/
+		waitpid(child_pid, &status, 0);
+}
+/**
+ * main - simple shell
+ * Return: void
+ */
+int main(void)
+{
+	ssize_t read;
+	size_t len;
+	char *command;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-		{
 			display_prompt();
-		}
-
 		/* Lire la commande depuis l'utilisateur ou depuis un fichier/redirection*/
 		if (isatty(STDIN_FILENO))
-		{
 			command = read_command();
-			/* Exécute la commande seulement si elle n'est pas vide*/
+		else
+		{
+			len = MAX_COMMAND_LENGTH;
+			command = (char *)malloc(len * sizeof(char));
 			if (command == NULL)
-			{
-				perror("malloc failed");
+			{perror("malloc a échoué");
 				exit(1);
 			}
 			read = getline(&command, &len, stdin);
 			if (read == -1)
 			{
 				free(command);
-				if (!feof(stdin))
-				{
-					perror("getline failed");
+				if (!isatty(STDIN_FILENO))
+					break;
+					 /* Fin de fichier atteinte*/
+				else
+				{perror("getline a échoué");
 					exit(1);
 				}
-				break; /* Fin de fichier atteinte */
 			}
 			if (read > 0 && command[read - 1] == '\n')
-			{
 				command[read - 1] = '\0';
-			}
 		}
-
-		/* Exécute la commande seulement si elle n'est pas vide */
+		/* Exécuter la commande seulement si elle n'est pas vide */
 		if (command[0] != '\0')
-		{
 			execute_command(command);
-		}
-		free(command); /* Libère la mémoire allouée par getline ou malloc */
+		free(command); /* Libérer la mémoire */
 	}
 	return (0);
 }
