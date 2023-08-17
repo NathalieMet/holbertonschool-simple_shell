@@ -86,23 +86,46 @@ char *read_command(void)
 	{
 		char *command;
 
-		while (1)
+	while (1)
+	{
+		if (isatty(STDIN_FILENO))
 		{
-			/* Affiche le prompt */
-			if (isatty(STDIN_FILENO))
-				display_prompt();
-			/* Lit la commande entrée par l'utilisateur*/
+			display_prompt();
+		}
+
+		/* Lire la commande depuis l'utilisateur ou depuis un fichier/redirection*/
+		if (isatty(STDIN_FILENO))
+		{
 			command = read_command();
 			/* Exécute la commande seulement si elle n'est pas vide*/
 			if (command == NULL)
 			{
-				break;
+				perror("malloc failed");
+				exit(1);
 			}
-			if (command[0] != '\0')
+			read = getline(&command, &len, stdin);
+			if (read == -1)
 			{
-				execute_command(command);
+				free(command);
+				if (!feof(stdin))
+				{
+					perror("getline failed");
+					exit(1);
+				}
+				break; /* Fin de fichier atteinte */
 			}
-			free(command); /* Libère la mémoire allouée par getline*/
+			if (read > 0 && command[read - 1] == '\n')
+			{
+				command[read - 1] = '\0';
+			}
 		}
-		return (0);
+
+		/* Exécute la commande seulement si elle n'est pas vide */
+		if (command[0] != '\0')
+		{
+			execute_command(command);
+		}
+		free(command); /* Libère la mémoire allouée par getline ou malloc */
 	}
+	return (0);
+}
