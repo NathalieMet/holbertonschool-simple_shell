@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 #include "main.h"
 #define MAX_COMMAND_LENGTH 100
-
+/* ce code valide complètement les 4 premiers tasks*/
 /**
  * display_prompt - displays the prompt
  * Return: void
@@ -62,12 +62,12 @@ void execute_command(char *command)
 		/* Configuration des arguments pour execve*/
 		char *argv[4];
 
-		argv[0] = "/bin/";
+		argv[0] = "/bin/sh";
 		argv[1] = "-c";
 		argv[2] = command;
 		argv[3] = NULL;
 		/* Exécute la commande en utilisant le shell*/
-		execve("/bin/", argv, environ);
+		execve("/bin/sh", argv, environ);
 		/* En cas d'échec de execve */
 		perror("execve failed");
 		exit(1);
@@ -106,7 +106,13 @@ int main(void)
 			if (read == -1)
 			{
 				free(command);
-				break;
+				if (!isatty(STDIN_FILENO))
+					break;
+					 /* Fin de fichier atteinte*/
+				else
+				{perror("getline a échoué");
+					exit(1);
+				}
 			}
 			if (read > 0 && command[read - 1] == '\n')
 				command[read - 1] = '\0';

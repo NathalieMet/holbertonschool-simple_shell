@@ -1,7 +1,34 @@
-#ifndef bibli_TF
-#define bibli_TF
-
+#ifndef MAIN_H
+#define MAIN_H
+#ifndef MAIN_20COPY_H
+#define MAIN_20COPY_H
+#ifndef MAIN_H
+#define MAIN_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
+#include <features.h>
 extern char **environ;
-int main(void);
 
-#endif
+#define _GNU_SOURCE
+
+#define MAX_COMMAND_LENGTH 100
+char *check_dir_path(char *first_word);
+char *get_first_word(const char *command);
+char *read_command(void);
+void display_prompt(void);
+void execute_command(char *command);
+char *_getenv(const char *name);
+char **tokenize_command(const char *command);
+int if_executable(char *exe, char **argv);
+
+#endif /* MAIN_H */
+
+
+#endif /* MAIN_20COPY_H */
+
+
+#endif /* MAIN_H */
