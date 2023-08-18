@@ -1,9 +1,5 @@
 #ifndef MAIN_H
 #define MAIN_H
-#ifndef MAIN_20COPY_H
-#define MAIN_20COPY_H
-#ifndef MAIN_H
-#define MAIN_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -24,11 +20,5 @@ void execute_command(char *command);
 char *_getenv(const char *name);
 char **tokenize_command(const char *command);
 int if_executable(char *exe, char **argv);
-
-#endif /* MAIN_H */
-
-
-#endif /* MAIN_20COPY_H */
-
 
 #endif /* MAIN_H */

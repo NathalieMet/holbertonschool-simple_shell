@@ -6,7 +6,7 @@ char *get_first_word(const char *command)
 	char *first_word;
 	char *result;
 
-	copy = strdup(command); // Duplique la chaîne pour la manipulation
+	copy = strdup(command); /* Duplique la chaîne pour la manipulation */
 	if (copy == NULL)
 	{
 		perror("strdup failed");
@@ -21,7 +21,7 @@ char *get_first_word(const char *command)
 		exit(1);
 	}
 
-	result = strdup(first_word); // Duplique le premier mot pour le retourner
+	result = strdup(first_word); /* Duplique le premier mot pour le retourner */
 	if (result == NULL)
 	{
 		perror("strdup failed");
@@ -29,6 +29,6 @@ char *get_first_word(const char *command)
 		exit(1);
 	}
 
-	free(copy); // Libère la mémoire de la copie temporaire
+	free(copy); /* Libère la mémoire de la copie temporaire */
 	return (result);
 }

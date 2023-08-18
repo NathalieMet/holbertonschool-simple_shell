@@ -1,8 +1,6 @@
-#include <sys/stat.h> // Inclure sys/stat.h pour struct stat et constantes
+#include <sys/stat.h>
 #include "main.h"
 #define MAX_COMMAND_LENGTH 100
-
-// ... (déclarations de fonctions display_prompt et read_command)
 
 char *check_dir_path(char *first_word)
 {
@@ -10,7 +8,6 @@ char *check_dir_path(char *first_word)
 	char *path_env = _getenv("PATH");
 	char *dir;
 	struct stat file_stat;
-	int found = 0;
 
 	if (path_env != NULL)
 	{
