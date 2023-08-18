@@ -4,7 +4,7 @@
  * Description: get the first token
  * @command: the string checked
  * Return: the token
-*/
+ */
 char *get_first_word(const char *command)
 {
 	char *copy;
@@ -32,6 +32,13 @@ char *get_first_word(const char *command)
 		perror("strdup failed");
 		free(copy);
 		exit(1);
+	}
+
+	if (strcmp(result, "exit") == 0)
+	{
+		free(copy);
+		free(result);
+		exit(0);
 	}
 
 	free(copy); /* Libère la mémoire de la copie temporaire */

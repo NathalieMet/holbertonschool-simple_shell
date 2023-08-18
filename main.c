@@ -21,30 +21,24 @@ int main(void)
 			free(command);
 			command = NULL;
 		}
-
 		command = read_command();
 		if (command == NULL)
 		break;
 		if (is_it_empty(command))
-		{
 			continue;
-		}
 		first_word = get_first_word(command);
 
 		if (first_word != NULL)
 		{
 			argv = tokenize_command(command);
 			exe = check_dir_path(first_word);
-
 			if (exe != NULL)
 			{
 				printf("Le premier mot de la commande est dans le chemin /bin/\n");
 				execute_command(exe, argv);
 			}
 			else
-			{
 				fprintf(stderr, "hsh: %d: %s: not found\n", command_count, first_word);
-			}
 			free(first_word);
 		}
 		command_count++;

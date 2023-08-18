@@ -5,7 +5,7 @@
  * @exe: executable
  * @argv: arguments
  * Return: return 0 if it succed
-*/
+ */
 int execute_command(char *exe, char **argv)
 {
 	int status, i;
@@ -31,7 +31,8 @@ int execute_command(char *exe, char **argv)
 		{
 			free(argv[i]);
 		}
-		free(argv);}
+		free(argv);
+	}
 
 	return (0);
 }

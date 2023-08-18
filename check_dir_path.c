@@ -6,7 +6,7 @@
  * Description: check if the token is an executable
  * @first_word: the string checked
  * Return: return the executable or NULL
-*/
+ */
 char *check_dir_path(char *first_word)
 {
 	char full_path[MAX_COMMAND_LENGTH];
@@ -27,10 +27,10 @@ char *check_dir_path(char *first_word)
 			if (stat(full_path, &file_stat) == 0)
 			{
 				if (S_ISREG(file_stat.st_mode) && (file_stat.st_mode & S_IXUSR))
-					{
-						free(path_copy);
-						return (strdup(full_path));
-					}
+				{
+					free(path_copy);
+					return (strdup(full_path));
+				}
 			}
 			if (stat(first_word, &file_stat) == 0)
 			{
