@@ -4,7 +4,7 @@
  * Description: simple shell main function
  * Return: 1
 */
-int main()
+int main(void)
 {
 	char *command;
 	char *first_word;
@@ -17,7 +17,7 @@ int main()
 			display_prompt();
 
 		command = read_command();
-		if(command == NULL)
+		if (command == NULL)
 		break;
 		if (is_it_empty(command))
 		{
@@ -44,5 +44,5 @@ int main()
 		}
 		free(command);
 	}
-	return 0;
+	return (0);
 }

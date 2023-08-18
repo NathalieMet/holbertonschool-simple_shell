@@ -27,5 +27,5 @@ int execute_command(char *exe, char **argv)
 		waitpid(child_pid, &status, 0); /* Attend la fin du processus enfant */
 	}
 
-	return 0;
+	return (0);
 }

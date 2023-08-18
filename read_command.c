@@ -9,6 +9,7 @@ char *read_command(void)
 	char *command;
 	size_t len;
 	ssize_t read;
+
 	len = 0;
 	command = NULL;
 	read = getline(&command, &len, stdin);
@@ -17,7 +18,7 @@ char *read_command(void)
 	{
 		free(command);
 		printf("\n");
-		return(NULL);
+		return (NULL);
 	}
 	if (read > 0 && command[read - 1] == '\n')
 	{

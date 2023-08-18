@@ -1,3 +1,9 @@
+/**
+ * tokenize_command - name of the function
+ * Description: tokenize the command
+ * @command: the command
+ * Return: tokens on success, 1 on error
+*/
 #include "main.h"
 
 char **tokenize_command(const char *command)

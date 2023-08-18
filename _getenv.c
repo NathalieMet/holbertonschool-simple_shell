@@ -2,8 +2,6 @@
 #include <string.h>
 #include "main.h"
 
-extern char **environ;
-
 char *_getenv(const char *name)
 {
 	int i;
