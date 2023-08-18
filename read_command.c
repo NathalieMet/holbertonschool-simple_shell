@@ -24,5 +24,10 @@ char *read_command(void)
 	{
 		command[read - 1] = '\0';
 	}
-	return (command);
-}
+	if (strcmp(command, "exit") == 0)
+	{
+		free(command);
+		exit(0);
+	}
+		return (command);
+	}
