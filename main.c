@@ -10,6 +10,7 @@ int main(void)
 	char *first_word;
 	char *exe;
 	char **argv;
+	int command_count = 1; /* Initialisation du compteur de commandes */
 
 	while (1)
 	{
@@ -42,11 +43,11 @@ int main(void)
 			}
 			else
 			{
-				printf("Le premier mot de la commande n'est pas dans le chemin /bin/\n");
-				printf("%s\n", exe);
+				fprintf(stderr, "hsh: %d: %s: not found\n", command_count, first_word);
 			}
 			free(first_word);
 		}
+		command_count++;
 	}
 	return (0);
 }
