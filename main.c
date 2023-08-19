@@ -34,7 +34,6 @@ int main(void)
 			exe = check_dir_path(first_word);
 			if (exe != NULL)
 			{
-				printf("Le premier mot de la commande est dans le chemin /bin/\n");
 				execute_command(exe, argv);
 			}
 			else
