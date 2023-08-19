@@ -11,12 +11,14 @@ char *check_dir_path(char *first_word)
 {
 	char full_path[MAX_COMMAND_LENGTH];
 	char *path_env = _getenv("PATH");
+	char *path_copy;
 	char *dir;
 	struct stat file_stat;
 
 	if (path_env != NULL)
 	{
-		dir = strtok(path_env, ":");
+		path_copy = strdup(path_env);
+		dir = strtok(path_copy, ":");
 		while (dir != NULL)
 		{
 
@@ -25,14 +27,20 @@ char *check_dir_path(char *first_word)
 			if (stat(full_path, &file_stat) == 0)
 			{
 				if (S_ISREG(file_stat.st_mode) && (file_stat.st_mode & S_IXUSR))
-					return (strdup(full_path));
+					{
+						free(path_copy);
+						return (strdup(full_path));
+					}
 			}
 			if (stat(first_word, &file_stat) == 0)
-			return (strdup(first_word));
+			{
+				free(path_copy);
+				return (strdup(first_word));
+			}
 
 			dir = strtok(NULL, ":");
 		}
+		free(path_copy);
 	}
-
 	return (NULL);
 }

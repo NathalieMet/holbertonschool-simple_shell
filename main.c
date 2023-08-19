@@ -15,13 +15,17 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO))
 			display_prompt();
+		if (command != NULL)
+		{
+			free(command);
+			command = NULL;
+		}
 
 		command = read_command();
 		if (command == NULL)
 		break;
 		if (is_it_empty(command))
 		{
-			free(command);
 			continue;
 		}
 		first_word = get_first_word(command);
@@ -39,10 +43,10 @@ int main(void)
 			else
 			{
 				printf("Le premier mot de la commande n'est pas dans le chemin /bin/\n");
+				printf("%s\n", exe);
 			}
 			free(first_word);
 		}
-		free(command);
 	}
 	return (0);
 }

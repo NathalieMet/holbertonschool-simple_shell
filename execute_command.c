@@ -8,7 +8,7 @@
 */
 int execute_command(char *exe, char **argv)
 {
-	int status;
+	int status, i;
 	pid_t child_pid;
 
 	child_pid = fork(); /* Crée un nouveau processus enfant */
@@ -25,7 +25,13 @@ int execute_command(char *exe, char **argv)
 	else /* Code exécuté par le processus parent */
 	{
 		waitpid(child_pid, &status, 0); /* Attend la fin du processus enfant */
-	}
+		/* Libération de la mémoire allouée pour exe et argv */
+		free(exe);
+		for (i = 0; argv[i] != NULL; i++)
+		{
+			free(argv[i]);
+		}
+		free(argv);}
 
 	return (0);
 }
