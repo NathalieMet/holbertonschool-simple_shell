@@ -8,10 +8,18 @@
 */
 int if_executable(char *exe, char **argv)
 {
+	int i;
+
 	if (execve(exe, argv, environ) == -1)
 	{
 		/* En cas d'échec de execve */
 		perror("execve failed");
+		free(exe);
+		for (i = 0; argv[i] != NULL; i++)
+		{
+			free(argv[i]);
+		}
+		free(argv);
 		exit(1);
 	}
 	return (0);
