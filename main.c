@@ -3,7 +3,7 @@
  * main - function main
  * Description: simple shell main function
  * Return: 1
-*/
+ */
 int main(void)
 {
 	char *command;
@@ -23,7 +23,7 @@ int main(void)
 		}
 		command = read_command();
 		if (command == NULL)
-		break;
+			break;
 		if (is_it_empty(command))
 			continue;
 		first_word = get_first_word(command);
@@ -41,6 +41,8 @@ int main(void)
 			free(first_word);
 		}
 		command_count++;
+		if (!isatty(STDIN_FILENO))
+			return (0);
 	}
 	return (0);
 }
