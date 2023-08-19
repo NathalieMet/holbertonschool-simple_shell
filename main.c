@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * main - function main
+ * Description: simple shell main function
+ * Return: 1
+*/
 int main()
 {
 	char *command;
@@ -13,7 +17,13 @@ int main()
 			display_prompt();
 
 		command = read_command();
-
+		if(command == NULL)
+		break;
+		if (is_it_empty(command))
+		{
+			free(command);
+			continue;
+		}
 		first_word = get_first_word(command);
 
 		if (first_word != NULL)
@@ -24,7 +34,7 @@ int main()
 			if (exe != NULL)
 			{
 				printf("Le premier mot de la commande est dans le chemin /bin/\n");
-				if_executable(exe, argv);
+				execute_command(exe, argv);
 			}
 			else
 			{

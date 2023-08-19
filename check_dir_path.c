@@ -1,7 +1,12 @@
 #include <sys/stat.h>
 #include "main.h"
 #define MAX_COMMAND_LENGTH 100
-
+/**
+ * check_dir_path - name of the function
+ * Description: check if the token is an executable
+ * @first_word: the string checked
+ * Return: return the executable or NULL
+*/
 char *check_dir_path(char *first_word)
 {
 	char full_path[MAX_COMMAND_LENGTH];

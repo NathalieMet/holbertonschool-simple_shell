@@ -1,5 +1,10 @@
 #include "main.h"
-
+/**
+ * get_first_word - name of the function
+ * Description: get the first token
+ * @command: the string checked
+ * Return: the token
+*/
 char *get_first_word(const char *command)
 {
 	char *copy;

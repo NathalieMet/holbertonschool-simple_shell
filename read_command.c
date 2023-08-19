@@ -12,10 +12,12 @@ char *read_command(void)
 	len = 0;
 	command = NULL;
 	read = getline(&command, &len, stdin);
+
 	if (read == -1)
 	{
-		perror("getline failed");
-		exit(1);
+		free(command);
+		printf("\n");
+		return(NULL);
 	}
 	if (read > 0 && command[read - 1] == '\n')
 	{

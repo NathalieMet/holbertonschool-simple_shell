@@ -16,9 +16,10 @@ char *check_dir_path(char *first_word);
 char *get_first_word(const char *command);
 char *read_command(void);
 void display_prompt(void);
-void execute_command(char *command);
 char *_getenv(const char *name);
 char **tokenize_command(const char *command);
 int if_executable(char *exe, char **argv);
+int execute_command(char *exe, char **argv);
+int is_it_empty(const char *str);
 
 #endif /* MAIN_H */
