@@ -26,8 +26,10 @@ int execute_command(char *exe, char **argv)
 	{
 		waitpid(child_pid, &status, 0); /* Attend la fin du processus enfant */
 		/* Libération de la mémoire allouée pour exe et argv */
-
+		if (!isatty(STDIN_FILENO))
+		{
+			exit(0); /* Quitte le shell en mode non-interactif */
+		}
 	}
-
 	return (0);
 }
