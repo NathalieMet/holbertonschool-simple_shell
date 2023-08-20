@@ -41,6 +41,8 @@ int main(void)
 			free(first_word);
 		}
 		command_count++;
+		if (!isatty(STDIN_FILENO))
+		return (0);
 	}
 	return (0);
 }
