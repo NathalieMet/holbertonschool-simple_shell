@@ -14,7 +14,6 @@ char *get_first_word(char *command, int count)
 	char *str;
 
 	copy = strdup(command); /* Duplique la chaîne pour la manipulation */
-
 	if (copy == NULL)
 	{
 		free(command);
@@ -30,7 +29,6 @@ char *get_first_word(char *command, int count)
 	}
 	result = strdup(first_word); /* Duplique le premier mot pour le retourner */
 	free(copy);
-	free(first_word);
 	if (result == NULL)
 	{
 		free(command);

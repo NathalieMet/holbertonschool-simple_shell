@@ -16,6 +16,7 @@ char *check_exit(char *command, char *result)
 	str = commande[1];
 	if (str == NULL)
 	{
+		free_tokens(commande);
 		free(result);
 		free(command);
 		exit(0);

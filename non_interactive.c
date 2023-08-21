@@ -5,7 +5,7 @@
  */
 void non_interactive(void)
 {
-	int i, count = 1;
+	int count = 1;
 	char *command;
 	char *commande_lue;
 	char *first_word;
@@ -36,9 +36,7 @@ void non_interactive(void)
 				fprintf(stderr, "hsh: 1: %s: not found\n", first_word);
 			free(first_word);
 
-			for (i = 0; argv[i] != NULL; i++)
-				free(argv[i]);
-			free(argv);
+			free_tokens(argv);
 		}
 	}
 	free(command); /* Libérer la mémoire */
