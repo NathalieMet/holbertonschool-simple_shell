@@ -23,7 +23,7 @@ int interactive(void)
 		if (is_it_empty(command))
 			continue; /* Ignorer les commandes vides */
 
-		first_word = get_first_word(command);
+		first_word = get_first_word(command, command_count);
 
 		if (first_word != NULL)
 		{

@@ -23,16 +23,18 @@ char **tokenize_command(const char *command)
 	command_copy = strdup(command);
 	if (command_copy == NULL)
 	{
+		free(tokens);
 		perror("strdup failed");
 		exit(1);
 	}
-
 	token = strtok(command_copy, " ");
 	while (token != NULL && token_count < 150)
 	{
 		tokens[token_count] = strdup(token);
 		if (tokens[token_count] == NULL)
 		{
+			free(tokens);
+			free(command_copy);
 			perror("strdup failed");
 			exit(1);
 		}

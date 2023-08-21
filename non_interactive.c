@@ -5,7 +5,7 @@
  */
 void non_interactive(void)
 {
-	int i;
+	int i, count = 1;
 	char *command;
 	char *commande_lue;
 	char *first_word;
@@ -23,7 +23,7 @@ void non_interactive(void)
 	/* Exécuter la commande seulement si elle n'est pas vide */
 	if (commande_lue[0] != '\0')
 	{
-		first_word = get_first_word(commande_lue);
+		first_word = get_first_word(commande_lue, count);
 		if (first_word != NULL)
 		{
 			argv = tokenize_command(commande_lue);
