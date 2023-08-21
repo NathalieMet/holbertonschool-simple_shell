@@ -4,6 +4,7 @@
  * Description: get the first token
  * @command: the string checked
  * @count: number of commands typed
+ * @status: status
  * Return: the token
  */
 char *get_first_word(char *command, int count, int status)

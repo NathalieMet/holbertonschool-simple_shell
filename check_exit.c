@@ -3,6 +3,7 @@
  * Description: check exit
  * @command: the command
  * @result: nnnn
+ * @status: status
  * Return: 0 on success, 1 on error
 */
 #include "main.h"
