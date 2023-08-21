@@ -35,7 +35,7 @@ void non_interactive(void)
 			}
 			else
 			{
-				fprintf(stderr, "hsh: 1: %s: not found\n", first_word);
+				fprintf(stderr, "./hsh: 1: %s: not found\n", first_word);
 				status = 127;
 			}
 			free(first_word);

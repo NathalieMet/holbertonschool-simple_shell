@@ -36,7 +36,7 @@ int interactive(void)
 			}
 			else
 			{
-				fprintf(stderr, "hsh: %d: %s: not found\n", command_count, first_word);
+				fprintf(stderr, "./hsh: %d: %s: not found\n", command_count, first_word);
 				status = 127;
 			}
 			free_tokens(argv);

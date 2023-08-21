@@ -41,7 +41,7 @@ char *get_first_word(char *command, int count, int status)
 		if (str != NULL)
 		{
 			free(result);
-			fprintf(stderr, "hsh: %d: exit: Illegal number: %s\n", count, str);
+			fprintf(stderr, "./hsh: %d: exit: Illegal number: %s\n", count, str);
 			return (NULL);
 		}
 	}
