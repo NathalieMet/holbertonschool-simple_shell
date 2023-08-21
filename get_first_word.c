@@ -24,7 +24,6 @@ char *get_first_word(char *command, int count, int status)
 	first_word = strtok(copy, " ");
 	if (first_word == NULL)
 	{
-		fprintf(stderr, "No word found.\n");
 		free(copy);
 		exit(1);
 	}
