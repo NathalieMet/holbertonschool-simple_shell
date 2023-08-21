@@ -24,6 +24,7 @@ int is_it_empty(const char *str);
 void non_interactive(void);
 int interactive(void);
 char *read_command_ni(char *command);
-char *check_exit(char *command);
+char *check_exit(char *command, char *result);
+void free_tokens(char **tokens);
 
 #endif /* MAIN_H */

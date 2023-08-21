@@ -16,7 +16,7 @@ int execute_command(char *exe, char **argv)
 	if (child_pid == -1)
 	{
 		perror("fork failed");
-		exit(1);
+		return (1);
 	}
 	else if (child_pid == 0) /* Code exécuté par le processus enfant */
 	{
@@ -28,6 +28,8 @@ int execute_command(char *exe, char **argv)
 		/* Libération de la mémoire allouée pour exe et argv */
 		if (!isatty(STDIN_FILENO))
 		{
+			free(exe);
+			free_tokens(argv);
 			exit(0); /* Quitte le shell en mode non-interactif */
 		}
 	}

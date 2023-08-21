@@ -14,6 +14,7 @@ char *get_first_word(char *command, int count)
 	char *str;
 
 	copy = strdup(command); /* Duplique la chaîne pour la manipulation */
+
 	if (copy == NULL)
 	{
 		free(command);
@@ -29,21 +30,22 @@ char *get_first_word(char *command, int count)
 	}
 	result = strdup(first_word); /* Duplique le premier mot pour le retourner */
 	free(copy);
+	free(first_word);
 	if (result == NULL)
 	{
+		free(command);
 		perror("strdup failed");
 		exit(1);
 	}
 	if (strcmp(result, "exit") == 0)
 	{
-		str = check_exit(command);
+		str = check_exit(command, result);
 		if (str != NULL)
 		{
 			free(result);
 			fprintf(stderr, "hsh: %d: exit: Illegal number: %s\n", count, str);
 			return (NULL);
 		}
-
 	}
 	return (result);
 }

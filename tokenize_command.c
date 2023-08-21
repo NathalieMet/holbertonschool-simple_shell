@@ -33,7 +33,7 @@ char **tokenize_command(const char *command)
 		tokens[token_count] = strdup(token);
 		if (tokens[token_count] == NULL)
 		{
-			free(tokens);
+			free_tokens(tokens);
 			free(command_copy);
 			perror("strdup failed");
 			exit(1);
