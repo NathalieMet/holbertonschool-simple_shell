@@ -11,6 +11,7 @@ int interactive(void)
 	char *exe;
 	char **argv;
 	int command_count = 1;
+	int status;
 
 	while (1)
 	{ /* Boucle infinie */
@@ -23,7 +24,7 @@ int interactive(void)
 			free(command);
 			continue; /* Ignorer les commandes vides */
 		}
-		first_word = get_first_word(command, command_count);
+		first_word = get_first_word(command, command_count, status);
 		if (first_word != NULL)
 		{
 			argv = tokenize_command(command);
@@ -31,11 +32,12 @@ int interactive(void)
 			free(command); /* Libérer la mémoire allouée pour command */
 			if (exe != NULL)
 			{
-				execute_command(exe, argv);
+				status = execute_command(exe, argv);
 			}
 			else
 			{
 				fprintf(stderr, "hsh: %d: %s: not found\n", command_count, first_word);
+				status = 127;
 			}
 			free_tokens(argv);
 			free(exe);
@@ -43,5 +45,5 @@ int interactive(void)
 		}
 		command_count++;
 	}
-	return (0);
+	return (status);
 }

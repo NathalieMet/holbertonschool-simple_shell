@@ -6,7 +6,7 @@
  * @count: number of commands typed
  * Return: the token
  */
-char *get_first_word(char *command, int count)
+char *get_first_word(char *command, int count, int status)
 {
 	char *copy;
 	char *first_word;
@@ -37,7 +37,7 @@ char *get_first_word(char *command, int count)
 	}
 	if (strcmp(result, "exit") == 0)
 	{
-		str = check_exit(command, result);
+		str = check_exit(command, result, status);
 		if (str != NULL)
 		{
 			free(result);

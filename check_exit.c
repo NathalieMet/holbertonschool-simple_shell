@@ -7,7 +7,7 @@
 */
 #include "main.h"
 
-char *check_exit(char *command, char *result)
+char *check_exit(char *command, char *result, int status)
 {
 	char **commande;
 	char *str;
@@ -19,7 +19,7 @@ char *check_exit(char *command, char *result)
 		free_tokens(commande);
 		free(result);
 		free(command);
-		exit(0);
+		exit(status);
 	}
 	else
 	return (str);

@@ -11,6 +11,7 @@ void non_interactive(void)
 	char *first_word;
 	char *exe;
 	char **argv;
+	int status = 0;
 
 	command = (char *)malloc(MAX_COMMAND_LENGTH * sizeof(char));
 	if (command == NULL)
@@ -23,7 +24,7 @@ void non_interactive(void)
 	/* Exécuter la commande seulement si elle n'est pas vide */
 	if (commande_lue[0] != '\0')
 	{
-		first_word = get_first_word(commande_lue, count);
+		first_word = get_first_word(commande_lue, count, status);
 		if (first_word != NULL)
 		{
 			argv = tokenize_command(commande_lue);
@@ -33,11 +34,15 @@ void non_interactive(void)
 				execute_command(exe, argv);
 			}
 			else
+			{
 				fprintf(stderr, "hsh: 1: %s: not found\n", first_word);
+				status = 127;
+			}
 			free(first_word);
 
 			free_tokens(argv);
 		}
 	}
 	free(command); /* Libérer la mémoire */
+	exit(status);
 }

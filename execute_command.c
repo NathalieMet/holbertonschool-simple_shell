@@ -26,12 +26,14 @@ int execute_command(char *exe, char **argv)
 	{
 		waitpid(child_pid, &status, 0); /* Attend la fin du processus enfant */
 		/* Libération de la mémoire allouée pour exe et argv */
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 2)
+			status = 2;
 		if (!isatty(STDIN_FILENO))
 		{
 			free(exe);
 			free_tokens(argv);
-			exit(0); /* Quitte le shell en mode non-interactif */
+			exit(status); /* Quitte le shell en mode non-interactif */
 		}
 	}
-	return (0);
+	return (status);
 }
