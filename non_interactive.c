@@ -15,7 +15,7 @@ int non_interactive(void)
 
 	while (1)
 	{ /* Boucle infinie */
-		command = read_command();
+		command = read_command(status);
 		if (command == NULL)
 			break; /* Sortir de la boucle en cas d'erreur de lecture */
 		if (is_it_empty(command))
