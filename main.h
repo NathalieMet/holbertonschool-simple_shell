@@ -23,7 +23,7 @@ int execute_command(char *exe, char **argv);
 int is_it_empty(const char *str);
 void non_interactive(void);
 int interactive(void);
-char *read_command_ni(char *command);
+char *read_command_ni(char *command, int status);
 char *check_exit(char *command, char *result, int status);
 void free_tokens(char **tokens);
 

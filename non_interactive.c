@@ -19,7 +19,7 @@ void non_interactive(void)
 		perror("malloc a échoué");
 		exit(1);
 	}
-	commande_lue = read_command_ni(command);
+	commande_lue = read_command_ni(command, status);
 
 	/* Exécuter la commande seulement si elle n'est pas vide */
 	if (commande_lue[0] != '\0')
