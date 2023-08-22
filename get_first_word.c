@@ -25,7 +25,7 @@ char *get_first_word(char *command, int count, int status)
 	if (first_word == NULL)
 	{
 		free(copy);
-		exit(1);
+		exit(status);
 	}
 	result = strdup(first_word); /* Duplique le premier mot pour le retourner */
 	free(copy);
