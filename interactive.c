@@ -3,7 +3,7 @@
  * interactive - name of the function
  * Description: treat an input in interactive mode
  * Return: 0
-*/
+ */
 int interactive(void)
 {
 	char *command;

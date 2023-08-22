@@ -28,12 +28,6 @@ int execute_command(char *exe, char **argv)
 		/* Libération de la mémoire allouée pour exe et argv */
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 2)
 			status = 2;
-		if (!isatty(STDIN_FILENO))
-		{
-			free(exe);
-			free_tokens(argv);
-			exit(status); /* Quitte le shell en mode non-interactif */
-		}
 	}
 	return (status);
 }

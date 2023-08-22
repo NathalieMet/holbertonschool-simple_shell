@@ -21,7 +21,7 @@ char **tokenize_command(const char *command);
 int if_executable(char *exe, char **argv);
 int execute_command(char *exe, char **argv);
 int is_it_empty(const char *str);
-void non_interactive(void);
+int non_interactive(void);
 int interactive(void);
 char *read_command_ni(char *command, int status);
 char *check_exit(char *command, char *result, int status);
