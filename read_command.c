@@ -1,11 +1,10 @@
 #include "main.h"
 /**
  * read_command - read the command
- * @status: status
  * Return: command
  */
 /* Lit la commande entrée par l'utilisateur */
-char *read_command(int status)
+char *read_command(void)
 {
 	char *command;
 	size_t len;
@@ -18,7 +17,8 @@ char *read_command(int status)
 	if (read == -1)
 	{
 		free(command);
-		exit(status);
+		command = NULL;
+		return (command);
 	}
 	if (read > 0 && command[read - 1] == '\n')
 	{

@@ -16,7 +16,7 @@ int interactive(void)
 	while (1)
 	{ /* Boucle infinie */
 		display_prompt();
-		command = read_command(status);
+		command = read_command();
 		if (command == NULL)
 			break; /* Sortir de la boucle en cas d'erreur de lecture */
 		if (is_it_empty(command))

@@ -14,7 +14,7 @@ extern char **environ;
 #define MAX_COMMAND_LENGTH 100
 char *check_dir_path(char *first_word);
 char *get_first_word(char *command, int count, int status);
-char *read_command(int status);
+char *read_command(void);
 void display_prompt(void);
 char *_getenv(const char *name);
 char **tokenize_command(const char *command);
