@@ -16,7 +16,7 @@ int execute_command(char *exe, char **argv)
 	if (child_pid == -1)
 	{
 		perror("fork failed");
-		return (1);
+		exit(1);
 	}
 	else if (child_pid == 0) /* Code exécuté par le processus enfant */
 	{
