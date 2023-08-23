@@ -35,6 +35,11 @@ char *get_first_word(char *command, int count, int status)
 		perror("strdup failed");
 		exit(1);
 	}
+	if (strcmp(result, "env") == 0)
+		{
+			print_environ(environ);
+			return (NULL);
+		}
 	if (strcmp(result, "exit") == 0)
 	{
 		str = check_exit(command, result, status);

@@ -23,5 +23,6 @@ int execute_command(char *exe, char **argv);
 int is_it_empty(const char *str);
 char *check_exit(char *command, char *result, int status);
 void free_tokens(char **tokens);
+void print_environ(char **environ);
 
 #endif /* MAIN_H */
