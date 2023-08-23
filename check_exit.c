@@ -23,5 +23,8 @@ char *check_exit(char *command, char *result, int status)
 		exit(status);
 	}
 	else
-	return (str);
+	{
+		free_tokens(commande);
+		return (str);
+	}
 }

@@ -37,6 +37,8 @@ char *get_first_word(char *command, int count, int status)
 	}
 	if (strcmp(result, "env") == 0)
 		{
+			free(result);
+			free(command);
 			print_environ(environ);
 			return (NULL);
 		}
@@ -47,6 +49,7 @@ char *get_first_word(char *command, int count, int status)
 		{
 			free(result);
 			fprintf(stderr, "./hsh: %d: exit: Illegal number: %s\n", count, str);
+			free(str);
 			return (NULL);
 		}
 	}
