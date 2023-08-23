@@ -13,5 +13,4 @@ void print_environ(char **environ)
 	{
 		printf("%s\n", environ[i]);
 	}
-	return;
 }

@@ -1,8 +1,8 @@
 #include "main.h"
 /**
- * interactive - name of the function
- * Description: treat an input in interactive mode
- * Return: 0
+ * main - name of the function
+ * Description: main function of simple shell
+ * Return: void
  */
 int main(void)
 {
@@ -32,9 +32,7 @@ int main(void)
 			exe = check_dir_path(first_word);
 			free(command); /* Libérer la mémoire allouée pour command */
 			if (exe != NULL)
-			{
 				status = execute_command(exe, argv);
-			}
 			else
 			{
 				fprintf(stderr, "./hsh: %d: %s: not found\n", command_count, first_word);

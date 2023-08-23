@@ -16,42 +16,31 @@ char *get_first_word(char *command, int count, int status)
 
 	copy = strdup(command); /* Duplique la chaîne pour la manipulation */
 	if (copy == NULL)
-	{
-		free(command);
+	{free(command);
 		perror("strdup failed");
-		exit(1);
-	}
+		exit(1); }
 	first_word = strtok(copy, " ");
 	if (first_word == NULL)
-	{
-		free(copy);
-		exit(status);
-	}
+	{free(copy);
+		exit(status); }
 	result = strdup(first_word); /* Duplique le premier mot pour le retourner */
 	free(copy);
 	if (result == NULL)
-	{
-		free(command);
+	{free(command);
 		perror("strdup failed");
-		exit(1);
-	}
+		exit(1); }
 	if (strcmp(result, "env") == 0)
-		{
-			free(result);
-			free(command);
-			print_environ(environ);
-			return (NULL);
-		}
+	{free(result);
+		free(command);
+		print_environ(environ);
+		return (NULL); }
 	if (strcmp(result, "exit") == 0)
-	{
-		str = check_exit(command, result, status);
+	{str = check_exit(command, result, status);
 		if (str != NULL)
-		{
-			free(result);
+		{free(result);
 			fprintf(stderr, "./hsh: %d: exit: Illegal number: %s\n", count, str);
 			free(str);
-			return (NULL);
-		}
-	}
+			return (NULL); }
+			}
 	return (result);
 }
