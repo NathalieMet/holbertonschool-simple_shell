@@ -1,0 +1,63 @@
+Simple shell(1) Functions Manual Simple shell(1)
+
+NAME
+	Simple shell - UNIX command line interpreter.
+
+SYNOPSIS
+
+	int main(void)
+	./hsh [command] [argument] for interactive mode
+	echo "[command] [argument]" | ./hsh for non-interactive mode
+
+DESCRIPTION
+
+This shell displays a prompt and wait for the user to type a command, then
+execute it if the command is found, or print an error message and display
+the prompt again. It supports basic commands with or without arguments.
+
+COMPILATION
+
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+
+MODES
+
+This shell in interactive mode displays a prompt and wait for the user to type
+a command, then execute it if the command is found, or print an error message
+and display the prompt again. In non-interactive mode, it can exectute
+commands that are passed to the program with a pipe operator.
+
+OPTIONS
+
+The options are not supported yet.
+
+Simple Commands
+
+A simple command is a sequence of optional variable assignments followed by
+blank-separated words, and terminated by a control operator.
+The first word specifies the command to be executed, and is passed as argument
+ zero. The remaining words are passed as arguments to the invoked command.
+The return value of a simple command is its exit status.
+
+ARGUMENTS
+
+If arguments remain after option processing, the first argument is assumed to
+be the name of a file containing shell commands. If bash is invoked in this
+fashion, $0 is set to the name of the file, and the positional parameters are
+set to the remaining arguments. Simple shell reads and executes commands from
+this file, then exits. Simple shell's exit status is the exit status of the last
+command executed in the script. If no commands are executed, the exit status
+is 0.
+An attempt is first made to open the file in the current directory, and,
+if no file is found, then the shell searches the directories in PATH for
+the script.
+
+RETURN VALUE
+
+Upon successful return, this function returns 0.
+If an output error is encountered, the return value will be different than 0.
+
+EXAMPLE
+
+1. Run a program: `./my_program`
+2. Execute a command and find the path: `ls -l`
+3. Execute a command with a full pathname: `/bin/ls -l`
