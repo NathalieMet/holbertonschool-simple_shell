@@ -21,7 +21,6 @@ char *check_dir_path(char *first_word)
 		dir = strtok(path_copy, ":");
 		while (dir != NULL)
 		{
-
 			snprintf(full_path, sizeof(full_path), "%s/%s", dir, first_word);
 
 			if (stat(full_path, &file_stat) == 0)
@@ -34,10 +33,16 @@ char *check_dir_path(char *first_word)
 			}
 			if (stat(first_word, &file_stat) == 0)
 			{
+				if (first_word[0] != '/')
+				{
+					if (first_word[0] != '.' && first_word[1] != '/')
+					{
+						return (NULL);
+					}
+				}
 				free(path_copy);
 				return (strdup(first_word));
 			}
-
 			dir = strtok(NULL, ":");
 		}
 		free(path_copy);
