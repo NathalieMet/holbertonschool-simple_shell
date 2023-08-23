@@ -11,7 +11,7 @@ int main(void)
 	char *exe;
 	char **argv;
 	int command_count = 1;
-	int status;
+	int status = 0;
 
 	while (1)
 	{ /* Boucle infinie */
