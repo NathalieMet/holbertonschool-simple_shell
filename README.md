@@ -8,7 +8,7 @@ Simple shell is a command language interpreter that executes commands read from 
 ## Man page
 
 You can see our man page for more explanations on how our simple shell works :
-./man_1_simple_shell
+[man_page](./man_1_simple_shell)
 
 ## Prototype : int main (void);
 
