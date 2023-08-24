@@ -5,9 +5,11 @@ NAME
 
 SYNOPSIS
 
-	int main(void)
-	./hsh [command] [argument] for interactive mode
-	echo "[command] [argument]" | ./hsh for non-interactive mode
+int main(void)
+
+./hsh [command] [argument] for interactive mode
+
+echo "[command] [argument]" | ./hsh for non-interactive mode
 
 DESCRIPTION
 

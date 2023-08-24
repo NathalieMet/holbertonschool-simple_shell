@@ -24,7 +24,6 @@ You can see our man page for more explanations on how our simple shell works :
 - [License](#license)
 - [Flowchart](#flowchart)
 - [Authors](#authors)
-- [Acknowledgments](#acknowledgments)
 
 ## Installation
 1. Clone this repository: `git clone git@github.com:NathalieMet/holbertonschool-simple_shell.git`
@@ -72,7 +71,7 @@ main.h
 1. Run a program: `./my_program`
 2. Execute a command and find the path: `ls -l`
 3. Execute a command with a full pathname: `/bin/ls -l`
-4. Execute a command in non-interactive mode : echo "/bin/ls" | ./hsh
+4. Execute a command in non-interactive mode : `echo "/bin/ls" | ./hsh`
 
 ## Exit Status
 - **0**: Successful execution
@@ -91,7 +90,4 @@ This project is not currently licensed and is intended for educational purposes 
 ![flowchart](https://github.com/NathalieMet/holbertonschool-simple_shell/blob/main/Diagramme%20sans%20nom.jpg)
 
 ## Authors
-[AUTHORS] (./AUTHORS)
-
-## Acknowledgments
-Thanks to the open-source community for inspiration and guidance.
+[AUTHORS](./AUTHORS)
