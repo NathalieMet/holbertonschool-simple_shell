@@ -41,6 +41,7 @@ Here is a list of our built-in commands
 This shell in interactive mode displays a prompt and wait for the user to type a command, then execute it if the command is found, or print an error message and display the prompt again. In non-interactive mode, it can exectute command that are passed to the program with a pipe operator. It supports basic commands.
 
 ## Functions used
+``` c
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -64,6 +65,7 @@ read_command.c
 tokenize_command.c
 main.h
 
+```
 ## Features
 - Basic command execution
 
@@ -87,7 +89,7 @@ This project is not currently licensed and is intended for educational purposes 
 
 ## Flowchart
 
-![flowchart](https://github.com/NathalieMet/holbertonschool-simple_shell/blob/main/Diagramme%20sans%20nom.jpg)
+![flowchart](https://github.com/NathalieMet/holbertonschool-simple_shell/blob/main/flowchart.jpg)
 
 ## Authors
 [AUTHORS](./AUTHORS)
