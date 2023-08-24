@@ -20,7 +20,13 @@ int execute_command(char *exe, char **argv)
 	}
 	else if (child_pid == 0) /* Code exécuté par le processus enfant */
 	{
-		if_executable(exe, argv); /* Exécute la commande */
+		if (execve(exe, argv, environ) == -1)
+		{
+			/* En cas d'échec de execve */
+			status = 127;
+			printf("./hsh: %s: No such file or directory\n", exe);
+			exit(status);
+		}
 	}
 	else /* Code exécuté par le processus parent */
 	{

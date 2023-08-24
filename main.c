@@ -16,7 +16,7 @@ int main(void)
 	while (1)
 	{ /* Boucle infinie */
 		if (isatty(STDIN_FILENO))
-			display_prompt();
+			printf("$ ");
 		command = read_command();
 		if (command == NULL)
 			break; /* Sortir de la boucle en cas d'erreur de lecture */
@@ -29,10 +29,12 @@ int main(void)
 		if (first_word != NULL)
 		{
 			argv = tokenize_command(command);
-			exe = check_dir_path(first_word);
+			exe = check_first_word(first_word);
 			free(command); /* Libérer la mémoire allouée pour command */
 			if (exe != NULL)
+			{
 				status = execute_command(exe, argv);
+			}
 			else
 			{
 				fprintf(stderr, "./hsh: %d: %s: not found\n", command_count, first_word);
@@ -41,8 +43,7 @@ int main(void)
 			free_tokens(argv);
 			free(exe);
 			free(first_word);
-		}
-		command_count++;
+		} command_count++;
 	}
 	return (status);
 }
