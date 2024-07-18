@@ -42,7 +42,6 @@ char **tokenize_command(const char *command)
 		token = strtok(NULL, " ");
 	}
 	tokens[token_count] = NULL;
-
 	free(command_copy);
 	return (tokens);
 }
